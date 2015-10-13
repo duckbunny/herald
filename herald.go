@@ -6,13 +6,12 @@
 package herald
 
 import (
-	"errors"
 	"flag"
 	"github.com/duckbunny/service"
 	"os"
 )
 
-var PoolTypes map[string]Pool
+var PoolTypes map[string]Pool = make(map[string]Pool)
 
 var DeclarationTypes map[string]Declaration = make(map[string]Declaration)
 
@@ -38,7 +37,7 @@ func setFlagEnv() {
 		flag.Parse()
 	}
 	// Check flag precedence.
-	// Invalidates herald
+	// Invalidates heraldBoth
 	if heraldPool != "" || heraldDeclare != "" {
 		if heraldDeclare == "" {
 			heraldDeclare = os.Getenv("HERALDDECLARE")
@@ -57,43 +56,37 @@ func setFlagEnv() {
 }
 
 func New(s *service.Service) *Herald {
+	return &Herald{Service: s}
+}
+
+func This() (*Herald, error) {
 	setFlagEnv()
-	h := Herald{Service: s}
+	h := &Herald{}
 	if pt, ok := PoolTypes[heraldPool]; ok {
 		h.Pool = pt
 	}
 	if dt, ok := DeclarationTypes[heraldDeclare]; ok {
 		h.Declaration = dt
 	}
-	return &h
-}
-
-func This() (*Herald, error) {
-	var h *Herald
 	s, err := service.This()
 	if err != nil {
 		return h, err
 	}
-	h = New(s)
-	err = h.Init()
+	h.Service = s
 	return h, err
 }
 
 func (h *Herald) Init() error {
-	if h.Pool == nil {
-		return errors.New("Herald pool service not set")
+	if h.Pool != nil {
+		err := h.Pool.Init()
+		if err != nil {
+			return err
+		}
 	}
-	if h.Declaration == nil {
-		return errors.New("Herald declaration service not set")
+	if h.Declaration.Init() != h.Pool.Init() {
+		return h.Declaration.Init()
 	}
-	if heraldDeclare == heraldPool {
-		return h.Pool.Init()
-	}
-	err := h.Pool.Init()
-	if err != nil {
-		return err
-	}
-	return h.Declaration.Init()
+	return nil
 }
 
 func (h *Herald) StartPool() error {
