@@ -69,9 +69,6 @@ func This() (*Herald, error) {
 		h.Declaration = dt
 	}
 	s, err := service.This()
-	if err != nil {
-		return h, err
-	}
 	h.Service = s
 	return h, err
 }
