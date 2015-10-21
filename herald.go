@@ -68,14 +68,20 @@ func This() (*Herald, error) {
 	h := &Herald{}
 	if heraldPool != "" {
 		if pt, ok := PoolTypes[heraldPool]; !ok {
-			err := fmt.Errorf("Attempt to utilize unrecognized Pooling mechanism %v", heraldPool)
+			err := fmt.Errorf(
+			"Attempt to utilize unrecognized Pooling mechanism %v",
+			heraldPool
+			)
 			return h, err
 		}
 		h.Pool = PoolTypes[heraldPool]
 	}
 	if heraldDeclare != "" {
 		if dt, ok := DeclarationTypes[heraldDeclare]; !ok {
-			err := fmt.Errorf("Attempt to utilize unrecognized Declaration mechanism %v", heraldPool)
+			err := fmt.Errorf(
+				"Attempt to utilize unrecognized Declaration mechanism %v",
+				heraldPool
+				)
 			return h, err
 		}
 		h.Declaration = DeclarationTypes[heraldDeclare]
@@ -85,6 +91,8 @@ func This() (*Herald, error) {
 	return h, err
 }
 
+// Wrapper to init Pool and Declare if they are set.  This allows them to
+// consume flags if necessary.
 func (h *Herald) Init() error {
 	if h.Pool != nil {
 		err := h.Pool.Init()
