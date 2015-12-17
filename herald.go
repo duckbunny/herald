@@ -7,6 +7,7 @@ package herald
 
 import (
 	"flag"
+	"fmt"
 	"github.com/duckbunny/service"
 	"os"
 )
@@ -67,21 +68,19 @@ func This() (*Herald, error) {
 	setFlagEnv()
 	h := &Herald{}
 	if heraldPool != "" {
-		if pt, ok := PoolTypes[heraldPool]; !ok {
+		if _, ok := PoolTypes[heraldPool]; !ok {
 			err := fmt.Errorf(
-			"Attempt to utilize unrecognized Pooling mechanism %v",
-			heraldPool
-			)
+				"Attempt to utilize unrecognized Pooling mechanism %v",
+				heraldPool)
 			return h, err
 		}
 		h.Pool = PoolTypes[heraldPool]
 	}
 	if heraldDeclare != "" {
-		if dt, ok := DeclarationTypes[heraldDeclare]; !ok {
+		if _, ok := DeclarationTypes[heraldDeclare]; !ok {
 			err := fmt.Errorf(
 				"Attempt to utilize unrecognized Declaration mechanism %v",
-				heraldPool
-				)
+				heraldPool)
 			return h, err
 		}
 		h.Declaration = DeclarationTypes[heraldDeclare]
@@ -162,6 +161,6 @@ func AddDeclaration(key string, d Declaration) {
 // Add Multiple declarations at once.
 func AddDeclarations(ds map[string]Declaration) {
 	for key, dec := range ds {
-		DeclarationTypes[key] = d
+		DeclarationTypes[key] = dec
 	}
 }
