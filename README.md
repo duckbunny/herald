@@ -1,4 +1,5 @@
-*Herald*
+###Herald
+
 Is the core to the declaration and pooling services intended to be used by microservices.
 
 [![GoDoc](https://godoc.org/github.com/duckbunny/herald?status.svg)](https://godoc.org/github.com/duckbunny/herald)
