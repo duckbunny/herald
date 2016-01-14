@@ -1,3 +1,9 @@
+*Herald*
+Is the core to the declaration and pooling services intended to be used by microservices.
+
+[![GoDoc](https://godoc.org/github.com/duckbunny/herald?status.svg)](https://godoc.org/github.com/duckbunny/herald)
+
+
 # herald
 --
     import "github.com/duckbunny/herald"
@@ -23,6 +29,7 @@ support many systems.
 
 A package can support one or both of the interfaces, and the interface to be
 used will be determined by environment variables or flags.
+
 
 ## Usage
 
