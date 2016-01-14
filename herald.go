@@ -8,8 +8,9 @@ package herald
 import (
 	"flag"
 	"fmt"
-	"github.com/duckbunny/service"
 	"os"
+
+	"github.com/duckbunny/service"
 )
 
 // PoolTypes are a collection of Pool Interfaces identified by strings
@@ -26,9 +27,9 @@ var heraldDeclare string
 var heraldBoth string
 
 func init() {
-	flag.StringVar(&heraldPool, "herald-p", "", "Herald to microservice pool.")
-	flag.StringVar(&heraldDeclare, "herald-d", "", "Herald to microservice declaration.")
-	flag.StringVar(&heraldBoth, "herald", "", "Herald to handle both declaration and pooling.")
+	flag.StringVar(&heraldPool, "herald-p", os.Getenv("HERALD_POOL"), "Herald to microservice pool.")
+	flag.StringVar(&heraldDeclare, "herald-d", os.Getenv("HERALD_DECLARE"), "Herald to microservice declaration.")
+	flag.StringVar(&heraldBoth, "herald", os.Getenv("HERALD"), "Herald to handle both declaration and pooling.")
 }
 
 // Herald is a wrapper structure of the pooling and declaration interfaces that will be implemented
