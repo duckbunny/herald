@@ -45,19 +45,11 @@ func setFlagEnv() {
 	if !flag.Parsed() {
 		flag.Parse()
 	}
-	// Check flag precedence.
-	// Invalidates heraldBoth
-	if heraldPool != "" || heraldDeclare != "" {
-		if heraldDeclare == "" {
-			heraldDeclare = os.Getenv("HERALDDECLARE")
-		}
-		if heraldPool == "" {
-			heraldPool = os.Getenv("HERALDPOOL")
-		}
-		return
+	if heraldPool == "" {
+		heraldPool = heraldBoth
 	}
-	if heraldBoth == "" {
-		heraldBoth = os.Getenv("HERALD")
+	if heraldDeclare == "" {
+		heraldDeclare = heraldBoth
 	}
 	heraldPool = heraldBoth
 	heraldDeclare = heraldBoth
@@ -100,8 +92,10 @@ func (h *Herald) Init() error {
 			return err
 		}
 	}
-	if h.Declaration.Init() != h.Pool.Init() {
-		return h.Declaration.Init()
+	if h.Declare != nil {
+		if h.Declaration.Init() != h.Pool.Init() {
+			return h.Declaration.Init()
+		}
 	}
 	return nil
 }
