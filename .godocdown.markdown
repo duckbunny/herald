@@ -20,11 +20,67 @@ Currently supports etcd and vulcand
 
 This package supports three flags and 3 environment variables.  Flags take prescendence over environement variables and specificty takes prescedence over genrality.
 
---herald	will set the decalre and pool services to the same thing env (HERALD)
+--herald	will set the declare and pool services to the same thing env (HERALD). Service must me both interface requirements.
 
 --herald-p	sets the pooling service only (HERALD_POOL)
 
 --herald-d	sets the declare service (HERALD_DECLARE)
+
+## Registry
+
+Herald has a registry of platforms currently supported and you can register all:
+
+```go
+package main
+
+import (
+	"github.com/duckbunny/herald/registry"
+)
+
+func init() {
+	registry.RegisterAll()
+}
+
+```
+
+## Interfaces
+
+Herald has two interfaces
+
+###Pool
+```go
+type Pool interface {
+	Start(*service.Service) error
+	Stop(*service.Service) error
+	Init() error
+}
+```
+New pool types can be created and registered utilizing the AddPool method.
+```go
+my_new_pool = new(MyPoolStruct)
+herald.AddPool("my_pool", my_new_pool)
+```
+
+which can then be invoked from a flag or env variable.
+
+
+###Declaration
+```go
+type Declaration interface {
+	Declare(*service.Service) error
+	Get(*service.Service) error
+	Init() error
+}
+
+```
+New declaration types can be created and registered utilizing the AddDeclaration method.
+
+```go
+my_new_declaration = new(MyDeclarationStruct)
+herald.AddDeclaration("my_declaration", my_new_declaration)
+```
+
+which can then be invoked from a flag or env variable.
 
 [![GoDoc](https://godoc.org/github.com/duckbunny/{{ .Name }}?status.svg)](https://godoc.org/github.com/duckbunny/{{ .Name }})
 
