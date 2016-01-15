@@ -26,6 +26,8 @@ This package supports three flags and 3 environment variables.  Flags take presc
 
 --herald-d	sets the declare service (HERALD_DECLARE)
 
+Herald only acts if a pool or declaration or both have been set.  Pool and declcarations are mutually independent so a user can mix and match services.
+
 ## Registry
 
 Herald has a registry of platforms currently supported and you can register all:
