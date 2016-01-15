@@ -21,7 +21,9 @@ Currently supports etcd and vulcand
 This package supports three flags and 3 environment variables.  Flags take prescendence over environement variables and specificty takes prescedence over genrality.
 
 --herald	will set the decalre and pool services to the same thing env (HERALD)
+
 --herald-p	sets the pooling service only (HERALD_POOL)
+
 --herald-d	sets the declare service (HERALD_DECLARE)
 
 [![GoDoc](https://godoc.org/github.com/duckbunny/herald?status.svg)](https://godoc.org/github.com/duckbunny/herald)
