@@ -1,6 +1,28 @@
-###Herald
+#Herald
 
-Is the core to the declaration and pooling services intended to be used by microservices.
+Herald is a package intended to make your microservice compatible with multiple service discovery platforms throught the use of flags or environment variables.
+
+Herald serves two functions.
+
+## Declaring the microservice.
+
+Utilizing the [service](https://github.com/duckbunny/service) definition a service can declare its definition in a k/v store.
+
+Currently supports etcd and consul.
+
+## Pooling the microservice
+
+Once again utilizing the [service](https://github.com/duckbunny/service) definition a system can become part of a pool of services for API routing.
+
+Currently supports etcd and vulcand
+
+## Flags and Env
+
+This package supports three flags and 3 environment variables.  Flags take prescendence over environement variables and specificty takes prescedence over genrality.
+
+--herald	will set the decalre and pool services to the same thing env (HERALD)
+--herald-p	sets the pooling service only (HERALD_POOL)
+--herald-d	sets the declare service (HERALD_DECLARE)
 
 [![GoDoc](https://godoc.org/github.com/duckbunny/{{ .Name }}?status.svg)](https://godoc.org/github.com/duckbunny/{{ .Name }})
 
