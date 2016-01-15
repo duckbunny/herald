@@ -1,8 +1,9 @@
 package main
 
 import (
-	"fmt"
+	"log"
 
+	"github.com/duckbunny/herald"
 	"github.com/duckbunny/herald/registry"
 )
 
@@ -11,5 +12,24 @@ func init() {
 }
 
 func main() {
-	fmt.Println("started")
+	h, err := herald.This()
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = h.Init()
+	if err != nil {
+		log.Fatal(err)
+		return
+	}
+	err = h.Declare()
+	if err != nil {
+		log.Fatal(err)
+		return
+	}
+	err = h.StartPool()
+	if err != nil {
+		log.Fatal(err)
+		return
+	}
+
 }
