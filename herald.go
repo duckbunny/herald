@@ -91,7 +91,11 @@ func (h *Herald) Init() error {
 		}
 	}
 	if h.Declaration != nil {
-		if h.Declaration.Init() != h.Pool.Init() {
+		if h.Pool != nil {
+			if h.Declaration.Init() != h.Pool.Init() {
+				return h.Declaration.Init()
+			}
+		} else {
 			return h.Declaration.Init()
 		}
 	}
