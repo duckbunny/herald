@@ -51,8 +51,6 @@ func setFlagEnv() {
 	if heraldDeclare == "" {
 		heraldDeclare = heraldBoth
 	}
-	heraldPool = heraldBoth
-	heraldDeclare = heraldBoth
 	return
 }
 
