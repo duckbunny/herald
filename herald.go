@@ -92,7 +92,7 @@ func (h *Herald) Init() error {
 			return err
 		}
 	}
-	if h.Declare != nil {
+	if h.Declaration != nil {
 		if h.Declaration.Init() != h.Pool.Init() {
 			return h.Declaration.Init()
 		}
@@ -102,17 +102,26 @@ func (h *Herald) Init() error {
 
 // Add this service to pool of microservices.
 func (h *Herald) StartPool() error {
-	return h.Pool.Start(h.Service)
+	if h.Pool != nil {
+		return h.Pool.Start(h.Service)
+	}
+	return nil
 }
 
 // Remove this service from pool of microservices.
 func (h *Herald) StopPool() error {
-	return h.Pool.Stop(h.Service)
+	if h.Pool != nil {
+		return h.Pool.Stop(h.Service)
+	}
+	return nil
 }
 
 // Declare this microservice definition.
 func (h *Herald) Declare() error {
-	return h.Declaration.Declare(h.Service)
+	if h.Declaration != nil {
+		return h.Declaration.Declare(h.Service)
+	}
+	return nil
 }
 
 // Get a foreign microservice definition.
