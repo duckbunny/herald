@@ -14,7 +14,7 @@ Currently supports etcd and consul.
 
 Once again utilizing the [service](https://github.com/duckbunny/service) definition a system can become part of a pool of services for API routing.
 
-Currently supports etcd and vulcand
+Currently supports consul and vulcand
 
 ## Flags and Env
 
