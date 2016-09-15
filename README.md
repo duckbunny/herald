@@ -1,5 +1,8 @@
 #Herald
 
+[![Build Status](https://travis-ci.org/duckbunny/herald.svg?branch=master)](https://travis-ci.org/duckbunny/herald)
+[![Coverage Status](https://coveralls.io/repos/github/duckbunny/herald/badge.svg?branch=master)](https://coveralls.io/github/duckbunny/herald?branch=master)
+
 Herald is a package intended to make your microservice compatible with multiple service discovery platforms throught the use of flags or environment variables.
 
 Herald serves two functions.
