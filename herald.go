@@ -27,9 +27,21 @@ var heraldDeclare string
 var heraldBoth string
 
 func init() {
-	flag.StringVar(&heraldPool, "herald-p", os.Getenv("HERALD_POOL"), "Herald to microservice pool.")
-	flag.StringVar(&heraldDeclare, "herald-d", os.Getenv("HERALD_DECLARE"), "Herald to microservice declaration.")
-	flag.StringVar(&heraldBoth, "herald", os.Getenv("HERALD"), "Herald to handle both declaration and pooling.")
+	flag.StringVar(
+		&heraldPool,
+		"herald-p",
+		os.Getenv("HERALD_POOL"),
+		"Herald to microservice pool.")
+	flag.StringVar(
+		&heraldDeclare,
+		"herald-d",
+		os.Getenv("HERALD_DECLARE"),
+		"Herald to microservice declaration.")
+	flag.StringVar(
+		&heraldBoth,
+		"herald",
+		os.Getenv("HERALD"),
+		"Herald to handle both declaration and pooling.")
 }
 
 // Herald is a wrapper structure of the pooling and declaration interfaces that will be implemented
@@ -144,13 +156,6 @@ func AddPool(key string, p Pool) {
 	PoolTypes[key] = p
 }
 
-// Add Multiple pools at once.
-func AddPools(ps map[string]Pool) {
-	for key, pool := range ps {
-		PoolTypes[key] = pool
-	}
-}
-
 // Declaration defines an interface that will broadcast the microservice
 // definition, for other services to digest.
 type Declaration interface {
@@ -162,11 +167,4 @@ type Declaration interface {
 // Add a single declaration.
 func AddDeclaration(key string, d Declaration) {
 	DeclarationTypes[key] = d
-}
-
-// Add Multiple declarations at once.
-func AddDeclarations(ds map[string]Declaration) {
-	for key, dec := range ds {
-		DeclarationTypes[key] = dec
-	}
 }
