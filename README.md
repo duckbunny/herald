@@ -1,7 +1,8 @@
 #Herald
-
+[![GoDoc](https://godoc.org/github.com/duckbunny/herald?status.svg)](https://godoc.org/github.com/duckbunny/herald)
 [![Build Status](https://travis-ci.org/duckbunny/herald.svg?branch=master)](https://travis-ci.org/duckbunny/herald)
 [![Coverage Status](https://coveralls.io/repos/github/duckbunny/herald/badge.svg?branch=master)](https://coveralls.io/github/duckbunny/herald?branch=master)
+[![Go Report Card](https://goreportcard.com/badge/github.com/duckbunny/herald)](https://goreportcard.com/report/github.com/duckbunny/herald)
 
 Herald is a package intended to make your microservice compatible with multiple service discovery platforms throught the use of flags or environment variables.
 
