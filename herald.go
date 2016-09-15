@@ -127,8 +127,8 @@ func (h *Herald) Declare() error {
 }
 
 // Get a foreign microservice definition.
-func (h *Herald) Get(s *service.Service) error {
-	return h.Declaration.Get(s)
+func (h *Herald) GetService(s *service.Service) error {
+	return h.Declaration.GetService(s)
 }
 
 // Pool defines an interface that will add and remove a microservice
@@ -155,7 +155,7 @@ func AddPools(ps map[string]Pool) {
 // definition, for other services to digest.
 type Declaration interface {
 	Declare(*service.Service) error
-	Get(*service.Service) error
+	GetService(*service.Service) error
 	Init() error
 }
 
